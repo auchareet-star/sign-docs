@@ -59,7 +59,7 @@ export function DashboardTable({ letters }: { letters: Letter[] }) {
                 <td>{l.docType}</td>
                 <td><StatusBadge status={l.status} /></td>
                 <td>
-                  <Link className="btn" href={`/doc/${l.docNo}`}>เปิด →</Link>
+                  <Link className="btn" href={{ pathname: "/doc", query: { no: l.docNo } }}>เปิด →</Link>
                 </td>
               </tr>
             ))}

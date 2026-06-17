@@ -88,7 +88,7 @@ export function LetterDoc({ letter: l, signature }: Props) {
             <td>
               <div className="letterhead">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="logo" src="/logo.png" alt="AYODIA" />
+                <img className="logo" src="/sign-docs/logo.png" alt="AYODIA" />
                 <div className="addr">
                   {COMPANY_ADDR.map((line, i) => (
                     <div key={i}>{line}</div>

@@ -72,17 +72,24 @@ const splitLines = (v: string): string[] =>
 
 const yes = (v: string): boolean => /^(ใช่|true|yes|y|1)$/i.test((v || "").trim());
 
-function buildUrl(sheetId: string): string {
-  // อ่านแบบ public CSV (ต้องตั้งค่าแชร์เป็น "ทุกคนที่มีลิงก์ดูได้")
+function buildUrl(): string {
+  // ถ้ากำหนด URL CSV มาเต็ม ๆ (เช่น ลิงก์ Publish to web) ใช้อันนั้นเลย
+  // ช่วยเลี่ยงปัญหา CORS ตอนอ่านจาก browser บน GitHub Pages
+  const direct = process.env.NEXT_PUBLIC_SHEET_CSV_URL;
+  if (direct) return direct;
+
+  // ไม่งั้นสร้างลิงก์ export CSV จากรหัส Sheet (ต้องแชร์ "ทุกคนที่มีลิงก์ดูได้")
+  const sheetId = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
+  if (!sheetId)
+    throw new Error(
+      "ยังไม่ได้ตั้งค่า NEXT_PUBLIC_GOOGLE_SHEET_ID (หรือ NEXT_PUBLIC_SHEET_CSV_URL) ใน .env.local"
+    );
   return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
 }
 
-/** ดึง + แปลง Google Sheet เป็นรายการหนังสือ */
+/** ดึง + แปลง Google Sheet เป็นรายการหนังสือ (ทำงานฝั่ง browser) */
 export async function fetchLetters(): Promise<Letter[]> {
-  const sheetId = process.env.GOOGLE_SHEET_ID;
-  if (!sheetId) throw new Error("ยังไม่ได้ตั้งค่า GOOGLE_SHEET_ID ใน .env.local");
-
-  const res = await fetch(buildUrl(sheetId), { cache: "no-store" });
+  const res = await fetch(buildUrl(), { cache: "no-store" });
   if (!res.ok) throw new Error(`อ่าน Google Sheet ไม่สำเร็จ (HTTP ${res.status})`);
   const csv = await res.text();
 

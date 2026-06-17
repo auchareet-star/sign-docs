@@ -1,14 +1,14 @@
 /* ฟอนต์ TH Sarabun New (ฟอนต์เดียวกับ PDF ต้นฉบับ) */
 @font-face {
   font-family: "TH Sarabun New";
-  src: url("/fonts/THSarabunNew.ttf") format("truetype");
+  src: url("/sign-docs/fonts/THSarabunNew.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "TH Sarabun New";
-  src: url("/fonts/THSarabunNew-Bold.ttf") format("truetype");
+  src: url("/sign-docs/fonts/THSarabunNew-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
