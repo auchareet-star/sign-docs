@@ -78,15 +78,31 @@ td.code { font-variant-numeric: tabular-nums; white-space: nowrap; }
 }
 .btn:hover { background: #f3f5f9; }
 .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
-.btn-primary:hover { filter: brightness(1.08); }
+.btn-primary:hover { background: var(--primary); filter: brightness(1.12); }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
 
 .muted { color: var(--muted); }
 .error { background: #fdecea; color: #a3261a; padding: 14px 16px; border-radius: 10px; border: 1px solid #f6c9c2; }
 
+/* ---------- Sticky header (nav + tools) — freeze ไว้บนสุดสำหรับ Tablet/iPad ---------- */
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .10);
+}
+
 /* ---------- Detail toolbar ---------- */
-.detailbar { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.detailbar {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 20px;
+  margin: 0;
+}
 .detailbar .spacer { flex: 1; }
+/* ปุ่มใหญ่ขึ้น กดง่ายบนจอสัมผัส */
+.detailbar .btn { padding: 10px 16px; font-size: 15px; min-height: 44px; }
 
 /* ================= เอกสารหนังสือ (A4) ================= */
 .paper {
@@ -134,10 +150,17 @@ td.code { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .sign-img { height: 70px; object-fit: contain; margin: 0 auto -10px; display: block; }
 .sign-line { letter-spacing: 1px; }
 
-.section-divider { margin-top: 30px; padding-top: 8px; }
+/* แบบตอบรับคำขอ — ทั้งบล็อก (รวมช่องลงชื่อ) ต้องอยู่หน้าเดียวกัน ไม่ตัดข้ามหน้า */
+.section-divider { margin-top: 30px; padding-top: 8px; break-inside: avoid; page-break-inside: avoid; }
 .response-title { text-align: center; font-weight: 700; margin-bottom: 12px; }
 .dotted { border-bottom: 1px dotted #555; display: inline-block; min-width: 55%; }
 .risk-note { margin-top: 16px; font-size: 14pt; }
+
+/* ---------- ย่อหน้ากระดาษให้พอดีจอ Tablet/มือถือ (เฉพาะบนจอ — ไม่กระทบ PDF) ---------- */
+/* ใช้ zoom เพื่อให้ความสูง layout ย่อตามจริง (รองรับ Safari/Chrome บน iPad) */
+@media screen and (max-width: 900px) { .paper-scale .paper { zoom: 0.82; } }
+@media screen and (max-width: 760px) { .paper-scale .paper { zoom: 0.64; } }
+@media screen and (max-width: 560px) { .paper-scale .paper { zoom: 0.46; } }
 
 /* ---------- print ---------- */
 /* @page ต้องอยู่ระดับบนสุด (ห้ามซ้อนใน @media print) ไม่งั้น Chrome จะไม่ใช้ขนาด A4 */

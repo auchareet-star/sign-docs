@@ -11,6 +11,8 @@
     "deploy": "gh-pages -d out -b gh-pages -t true"
   },
   "dependencies": {
+    "html2canvas-pro": "^2.0.4",
+    "jspdf": "^4.2.1",
     "next": "^14.2.35",
     "papaparse": "5.4.1",
     "react": "18.3.1",
@@ -18,12 +20,12 @@
     "react-signature-canvas": "1.0.6"
   },
   "devDependencies": {
-    "gh-pages": "6.1.1",
     "@types/node": "20.16.11",
     "@types/papaparse": "5.3.14",
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.0",
     "@types/react-signature-canvas": "1.0.5",
+    "gh-pages": "6.1.1",
     "typescript": "5.6.3"
   }
 }
